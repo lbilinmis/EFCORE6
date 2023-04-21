@@ -4,7 +4,9 @@ using EFCORE6.DatabaseFirst.Dal.Contexts;
 using EFCORE6.DatabaseFirst.Models;
 using Microsoft.EntityFrameworkCore;
 
-using (var context=new AppDbContext())
+DbContextInitializer.Build();
+
+using (var context = new AppDbContext(DbContextInitializer.OptionsBuilder.Options))
 {
     var products = await context.Products.ToListAsync();
 

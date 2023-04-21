@@ -10,11 +10,18 @@ namespace EFCORE6.DatabaseFirst.Dal.Contexts
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Data Source=HUAWEI;Initial Catalog=DatabaseFirstDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;");
+        //}
+        public AppDbContext()
         {
-            optionsBuilder.UseSqlServer(@"Data Source=HUAWEI;Initial Catalog=DatabaseFirstDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;");
-        }
 
+        }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
         public DbSet<Product> Products { get; set; }
     }
 }
