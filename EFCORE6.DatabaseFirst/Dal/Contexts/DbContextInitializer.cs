@@ -20,8 +20,8 @@ namespace EFCORE6.DatabaseFirst.Dal.Contexts
 
             Configuration = builder.Build();
             
-            OptionsBuilder=new DbContextOptionsBuilder<AppDbContext> ();
-            OptionsBuilder.UseSqlServer(Configuration.GetConnectionString("SqlConnection"));
+            //OptionsBuilder=new DbContextOptionsBuilder<AppDbContext> ();
+            //OptionsBuilder.UseSqlServer(Configuration.GetConnectionString("SqlConnection"));
         }
 
     }

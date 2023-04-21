@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 DbContextInitializer.Build();
 
-using (var context = new AppDbContext(DbContextInitializer.OptionsBuilder.Options))
+//using (var context = new AppDbContext(DbContextInitializer.OptionsBuilder.Options))
+using (var context = new AppDbContext())
 {
     var products = await context.Products.ToListAsync();
 
