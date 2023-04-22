@@ -95,24 +95,24 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentTeacher",
+                name: "StudentTeacherAraTablo",
                 columns: table => new
                 {
-                    StudentsId = table.Column<int>(type: "int", nullable: false),
-                    TeachersId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentTeacher", x => new { x.StudentsId, x.TeachersId });
+                    table.PrimaryKey("PK_StudentTeacherAraTablo", x => new { x.StudentId, x.TeacherId });
                     table.ForeignKey(
-                        name: "FK_StudentTeacher_Students_StudentsId",
-                        column: x => x.StudentsId,
+                        name: "FK__StudentId",
+                        column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentTeacher_Teachers_TeachersId",
-                        column: x => x.TeachersId,
+                        name: "FK__TeacherId",
+                        column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -179,9 +179,9 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentTeacher_TeachersId",
-                table: "StudentTeacher",
-                column: "TeachersId");
+                name: "IX_StudentTeacherAraTablo_TeacherId",
+                table: "StudentTeacherAraTablo",
+                column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -193,7 +193,7 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                 name: "ProductDetails");
 
             migrationBuilder.DropTable(
-                name: "StudentTeacher");
+                name: "StudentTeacherAraTablo");
 
             migrationBuilder.DropTable(
                 name: "NewProduct");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EFCORE6.CodeFirst_Relationships.Models;
 
 namespace EFCORE6.CodeFirst_Relationships.Models
 {

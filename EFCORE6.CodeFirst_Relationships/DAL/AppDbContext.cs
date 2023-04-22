@@ -22,19 +22,36 @@ namespace EFCORE6.CodeFirst_Relations.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Her zaman has ile başlanmalı
+            // one to many 
             modelBuilder.Entity<Category>()
                 .HasMany(x => x.Products)
                 .WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
 
+            // one to one
             modelBuilder.Entity<Product>()
                 .HasOne(x => x.ProductDetail)
                 .WithOne(x => x.Product)
                 .HasForeignKey<ProductDetail>(x => x.ProductId);
 
+            //one to one
             modelBuilder.Entity<NewProduct>()
-                .HasOne(x=>x.NewProductDetail)
-                .WithOne(x=>x.NewProduct)
+                .HasOne(x => x.NewProductDetail)
+                .WithOne(x => x.NewProduct)
                 .HasForeignKey<NewProductDetail>(x => x.Id);
+
+
+            // many to many işlemi
+            modelBuilder.Entity<Student>()
+                .HasMany(x => x.Teachers)
+                .WithMany(x => x.Students)
+                .UsingEntity<Dictionary<string, object>>(
+                    "StudentTeacherAraTablo",
+                    st => st.HasOne<Teacher>()
+                    .WithMany().HasForeignKey("TeacherId").HasConstraintName("FK__TeacherId"),
+                     st => st.HasOne<Student>()
+                    .WithMany().HasForeignKey("StudentId").HasConstraintName("FK__StudentId")
+                );
+
 
             base.OnModelCreating(modelBuilder);
         }

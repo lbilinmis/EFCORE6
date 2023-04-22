@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCORE6.CodeFirst_Relationships.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230422174708_initialize")]
+    [Migration("20230422180932_initialize")]
     partial class initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -191,19 +191,19 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("StudentTeacher", b =>
+            modelBuilder.Entity("StudentTeacherAraTablo", b =>
                 {
-                    b.Property<int>("StudentsId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeachersId")
+                    b.Property<int>("TeacherId")
                         .HasColumnType("int");
 
-                    b.HasKey("StudentsId", "TeachersId");
+                    b.HasKey("StudentId", "TeacherId");
 
-                    b.HasIndex("TeachersId");
+                    b.HasIndex("TeacherId");
 
-                    b.ToTable("StudentTeacher");
+                    b.ToTable("StudentTeacherAraTablo");
                 });
 
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProduct", b =>
@@ -250,19 +250,21 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("StudentTeacher", b =>
+            modelBuilder.Entity("StudentTeacherAraTablo", b =>
                 {
                     b.HasOne("EFCORE6.CodeFirst_Relationships.Models.Student", null)
                         .WithMany()
-                        .HasForeignKey("StudentsId")
+                        .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK__StudentId");
 
                     b.HasOne("EFCORE6.CodeFirst_Relationships.Models.Teacher", null)
                         .WithMany()
-                        .HasForeignKey("TeachersId")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK__TeacherId");
                 });
 
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.Category", b =>
