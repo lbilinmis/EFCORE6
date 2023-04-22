@@ -29,7 +29,11 @@ using (var context = new AppDbContext())
 
     //Find methodu id ile arama işlemlerinde kullanılır tek bir kayıt için kullanılmaktadır
     // bulamadığı taktirde null dönecektir hata forlatmasını istersek single kullanılır
-    var products = context.Products.Find(17);
+    var products = context.Products.Find(15);
 
-    Console.WriteLine( products.Barcode);
+    //products.ForEach(p =>
+    //{
+    //    Console.WriteLine(p.Name);
+    //});
+
 }
