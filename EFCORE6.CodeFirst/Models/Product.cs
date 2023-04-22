@@ -13,6 +13,7 @@ namespace EFCORE6.CodeFirst.Models
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public string Barcode { get; set; }
+        public DateTime? CreatedDate { get; set; } = DateTime.Now;
 
     }
 }
