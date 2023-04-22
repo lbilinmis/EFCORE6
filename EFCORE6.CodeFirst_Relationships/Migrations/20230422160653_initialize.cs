@@ -22,6 +22,29 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NewProduct",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    Barcode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewProduct", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NewProduct_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -40,6 +63,27 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NewProductDetail",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Width = table.Column<int>(type: "int", nullable: true),
+                    Weightth = table.Column<int>(type: "int", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: true),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NewProductDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NewProductDetail_NewProduct_Id",
+                        column: x => x.Id,
+                        principalTable: "NewProduct",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -68,6 +112,11 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_NewProduct_CategoryId",
+                table: "NewProduct",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductDetails_ProductId",
                 table: "ProductDetails",
                 column: "ProductId",
@@ -82,7 +131,13 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "NewProductDetail");
+
+            migrationBuilder.DropTable(
                 name: "ProductDetails");
+
+            migrationBuilder.DropTable(
+                name: "NewProduct");
 
             migrationBuilder.DropTable(
                 name: "Products");

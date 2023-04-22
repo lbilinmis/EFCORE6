@@ -39,6 +39,58 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("NewProduct");
+                });
+
+            modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProductDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Weightth")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Width")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewProductDetail");
+                });
+
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -100,6 +152,28 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
                     b.ToTable("ProductDetails");
                 });
 
+            modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProduct", b =>
+                {
+                    b.HasOne("EFCORE6.CodeFirst_Relationships.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProductDetail", b =>
+                {
+                    b.HasOne("EFCORE6.CodeFirst_Relationships.Models.NewProduct", "NewProduct")
+                        .WithOne("NewProductDetail")
+                        .HasForeignKey("EFCORE6.CodeFirst_Relationships.Models.NewProductDetail", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NewProduct");
+                });
+
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.Product", b =>
                 {
                     b.HasOne("EFCORE6.CodeFirst_Relationships.Models.Category", "Category")
@@ -125,6 +199,12 @@ namespace EFCORE6.CodeFirst_Relationships.Migrations
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.NewProduct", b =>
+                {
+                    b.Navigation("NewProductDetail")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCORE6.CodeFirst_Relationships.Models.Product", b =>

@@ -26,6 +26,16 @@ namespace EFCORE6.CodeFirst_Relations.DAL
                 .HasMany(x => x.Products)
                 .WithOne(x => x.Category).HasForeignKey(x => x.CategoryId);
 
+            modelBuilder.Entity<Product>()
+                .HasOne(x => x.ProductDetail)
+                .WithOne(x => x.Product)
+                .HasForeignKey<ProductDetail>(x => x.ProductId);
+
+            modelBuilder.Entity<NewProduct>()
+                .HasOne(x=>x.NewProductDetail)
+                .WithOne(x=>x.NewProduct)
+                .HasForeignKey<NewProductDetail>(x => x.Id);
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Product> Products { get; set; }
