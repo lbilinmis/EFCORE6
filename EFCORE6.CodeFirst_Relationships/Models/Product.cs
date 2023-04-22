@@ -19,5 +19,7 @@ namespace EFCORE6.CodeFirst_Relationships.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; } // Navigation property
 
+        public ProductDetail ProductDetail { get; set; }
+
     }
 }
