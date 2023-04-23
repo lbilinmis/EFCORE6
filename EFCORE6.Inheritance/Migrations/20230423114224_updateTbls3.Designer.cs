@@ -4,6 +4,7 @@ using EFCORE6.Inheritance.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCORE6.Inheritance.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230423114224_updateTbls3")]
+    partial class updateTbls3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,21 +112,17 @@ namespace EFCORE6.Inheritance.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("DiscountPrice")
-                        .HasPrecision(9, 2)
-                        .HasColumnType("decimal(9,2)");
-
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(9, 2)
-                        .HasColumnType("decimal(9,2)");
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");
@@ -133,13 +131,7 @@ namespace EFCORE6.Inheritance.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Name", "Barcode");
-
-                    SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("Name", "Barcode"), new[] { "Price", "Stock" });
-
                     b.ToTable("Products");
-
-                    b.HasCheckConstraint("PriceDiscountCheck", "[Price]>[DiscountPrice]");
                 });
 
             modelBuilder.Entity("EFCORE6.Inheritance.Models.ProductDetail", b =>
@@ -254,11 +246,13 @@ namespace EFCORE6.Inheritance.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<int>("Age")
-                                .HasColumnType("int");
+                                .HasColumnType("int")
+                                .HasColumnName("Yas");
 
                             b1.Property<string>("Name")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Soyad");
 
                             b1.Property<string>("SurName")
                                 .IsRequired()
@@ -284,11 +278,13 @@ namespace EFCORE6.Inheritance.Migrations
                                 .HasColumnType("int");
 
                             b1.Property<int>("Age")
-                                .HasColumnType("int");
+                                .HasColumnType("int")
+                                .HasColumnName("Yas");
 
                             b1.Property<string>("Name")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("nvarchar(max)")
+                                .HasColumnName("Soyad");
 
                             b1.Property<string>("SurName")
                                 .IsRequired()

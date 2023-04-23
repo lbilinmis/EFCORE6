@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace EFCORE6.Inheritance.Models
 {
+    [Index(nameof(Name))]
+    [Index(nameof(Barcode))]
+    //indexleme yapmak için kullanılan methods
     public class NewProduct
     {
         public int Id { get; set; }

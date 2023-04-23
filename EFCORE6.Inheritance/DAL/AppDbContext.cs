@@ -16,13 +16,41 @@ namespace EFCORE6.Inheritance.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             DbContextInitializer.Build();
-            optionsBuilder.LogTo(Console.WriteLine,LogLevel.Information).UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlConnection"));
-            
+            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information).UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlConnection"));
+
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //Fluent APı tarafında bu şekilde tanımlanır Indexlemek istediğim alanlar için hasIndex kullanılır
+            //Name ile beraber farkı datların da gelmesini istersek  .IncludeProperties(x => new { x.Price, x.Stock });
+            // kod bloğunu da eklememiz gerekir
+            // sorgumuzu yazarken hangi alanları da çekeceğimiz belirlersek kod yapısnı ona göre yazmamız lazım
+
+            modelBuilder.Entity<Product>().HasIndex(x => new { x.Name, x.Barcode })
+                .IncludeProperties(x => new { x.Price, x.Stock });
+
+
+            // kural belirtmek istersek
+            modelBuilder.Entity<Product>().HasCheckConstraint("PriceDiscountCheck","[Price]>[DiscountPrice]");
+
+
+            //modelBuilder.Entity<PersonManager>().OwnsOne(x => x.Person, x =>
+            //{
+            //    x.Property(x => x.Name).HasColumnName("Ad");
+            //    x.Property(x => x.SurName).HasColumnName("Soyad");
+            //    x.Property(x => x.Age).HasColumnName("Yas");
+            //});
+
+            //modelBuilder.Entity<PersonEmployee>().OwnsOne(x => x.Person, x =>
+            //{
+            //    x.Property(x => x.Name).HasColumnName("Ad");
+            //    x.Property(x => x.SurName).HasColumnName("Soyad");
+            //    x.Property(x => x.Age).HasColumnName("Yas");
+            //});
+
 
             //Data anottaion olarak tanımlama yapmadan burada da tanımlama yapabiliriz
             //modelBuilder.Entity<Product>().Property(x => x.Price).HasPrecision(18, 2);
@@ -72,5 +100,8 @@ namespace EFCORE6.Inheritance.DAL
         public DbSet<BasePerson> Persons { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+
+        public DbSet<PersonManager> PersonManagers { get; set; }
+        public DbSet<PersonEmployee> PersonEmployees { get; set; }
     }
 }

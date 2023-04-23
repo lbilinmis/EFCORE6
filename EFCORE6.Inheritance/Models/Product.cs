@@ -14,8 +14,11 @@ namespace EFCORE6.Inheritance.Models
         public int Id { get; set; }
         public string? Name { get; set; }
 
-        [Precision(18,2)]
+        [Precision(9,2)]
         public decimal Price { get; set; }
+
+        [Precision(9, 2)]
+        public decimal DiscountPrice { get; set; }
         public int Stock { get; set; }
         public string? Barcode { get; set; }
 
