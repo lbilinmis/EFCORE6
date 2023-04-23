@@ -31,17 +31,44 @@ using (var context = new AppDbContext())
 
     #endregion
 
+    #region EagerLoading
     //Eager loading ilk anda datayı alma işlemi
     // Category tablosunu çekerken ona bağlı ürünleri de çekmek istersek
     //Include komutunu birden fazla tablo varsa thenInclude diyerek categoriye bağlı verileri getirmiş oluruz
 
-    var categoryVithProducts = context.Categories.Include(x=>x.Products).ThenInclude(x=>x.ProductDetail).First();
+    //var categoryVithProducts = context.Categories.Include(x => x.Products).ThenInclude(x => x.ProductDetail).First();
 
-    var productDetail=context.ProductDetails.Include(x=>x.Product).ThenInclude(x=>x.Category).First();
+    //var productDetail = context.ProductDetails.Include(x => x.Product).ThenInclude(x => x.Category).First();
 
-    var product=context.Products.Include(x=>x.ProductDetail).Include(x=>x.Category).First();
+    //var product = context.Products.Include(x => x.ProductDetail).Include(x => x.Category).First();
 
     // product tablosunda iki tane arka arkaya navigate proprty olduğundan ötürü theninclude demeden işlem yapılır
+
+    #endregion
+
+
+    #region ExplicitLoading
+
+    
+    var category = context.Categories.First(); // burada sadece kategoriler çekildi ancak altaki kod bloğunda ürünler çekilmektedir
+
+
+    // aşağıdaki işlemle beraber artık ürünler kategoriye bağlanmış olacaktır
+    context.Entry(category).Collection(x => x.Products).Load();
+    category.Products.ForEach(x =>
+    {
+        Console.WriteLine(x.Name + " - " + x.Price);
+    });
+
+
+    //birebir ilişkilerde 
+    var product = context.Products.First();
+
+    context.Entry(product).Reference(x => x.ProductDetail).Load();
+
+
+
+    #endregion
 
     Console.WriteLine("Tamamlandı");
 }
