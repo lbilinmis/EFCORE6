@@ -1,5 +1,5 @@
 ﻿
-using EFCORE6.RelatedDataLoad.Models;
+using EFCORE6.Inheritance.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFCORE6.RelatedDataLoad.DAL
+namespace EFCORE6.Inheritance.DAL
 {
     public class AppDbContext : DbContext
     {
@@ -68,5 +68,8 @@ namespace EFCORE6.RelatedDataLoad.DAL
 
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+
+        public DbSet<Manager> Managers { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCORE6.CodeFirst", "EFCORE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCORE6.CodeFirst_Relationships", "EFCORE6.CodeFirst_Relationships\EFCORE6.CodeFirst_Relationships.csproj", "{5735FAF9-E26F-4927-8ABF-124AE4BF7AE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCORE6.RelatedDataLoad", "EFCORE6.RelatedDataLoad\EFCORE6.RelatedDataLoad.csproj", "{D1A1DB89-F913-42F4-8CE8-FEB3D72E6600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCORE6.RelatedDataLoad", "EFCORE6.RelatedDataLoad\EFCORE6.RelatedDataLoad.csproj", "{D1A1DB89-F913-42F4-8CE8-FEB3D72E6600}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCORE6.Inheritance", "EFCORE6.Inheritance\EFCORE6.Inheritance.csproj", "{0C97F214-9468-419D-AF54-7B64663CF645}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D1A1DB89-F913-42F4-8CE8-FEB3D72E6600}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1A1DB89-F913-42F4-8CE8-FEB3D72E6600}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1A1DB89-F913-42F4-8CE8-FEB3D72E6600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C97F214-9468-419D-AF54-7B64663CF645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C97F214-9468-419D-AF54-7B64663CF645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C97F214-9468-419D-AF54-7B64663CF645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C97F214-9468-419D-AF54-7B64663CF645}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

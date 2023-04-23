@@ -50,21 +50,21 @@ using (var context = new AppDbContext())
     #region ExplicitLoading
 
     
-    var category = context.Categories.First(); // burada sadece kategoriler çekildi ancak altaki kod bloğunda ürünler çekilmektedir
+    //var category = context.Categories.First(); // burada sadece kategoriler çekildi ancak altaki kod bloğunda ürünler çekilmektedir
 
 
-    // aşağıdaki işlemle beraber artık ürünler kategoriye bağlanmış olacaktır
-    context.Entry(category).Collection(x => x.Products).Load();
-    category.Products.ForEach(x =>
-    {
-        Console.WriteLine(x.Name + " - " + x.Price);
-    });
+    //// aşağıdaki işlemle beraber artık ürünler kategoriye bağlanmış olacaktır
+    //context.Entry(category).Collection(x => x.Products).Load();
+    //category.Products.ForEach(x =>
+    //{
+    //    Console.WriteLine(x.Name + " - " + x.Price);
+    //});
 
 
-    //birebir ilişkilerde 
-    var product = context.Products.First();
+    ////birebir ilişkilerde 
+    //var product = context.Products.First();
 
-    context.Entry(product).Reference(x => x.ProductDetail).Load();
+    //context.Entry(product).Reference(x => x.ProductDetail).Load();
 
 
 
