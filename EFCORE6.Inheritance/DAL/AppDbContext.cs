@@ -69,6 +69,7 @@ namespace EFCORE6.Inheritance.DAL
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
 
+        public DbSet<BasePerson> Persons { get; set; }
         public DbSet<Manager> Managers { get; set; }
         public DbSet<Employee> Employees { get; set; }
     }
