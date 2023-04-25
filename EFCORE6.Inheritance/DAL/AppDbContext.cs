@@ -24,6 +24,8 @@ namespace EFCORE6.Inheritance.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+            modelBuilder.Entity<Product>().ToSqlQuery("select Id,Name,Price,DiscountPrice from Product");
+
             //Fluent APı tarafında bu şekilde tanımlanır Indexlemek istediğim alanlar için hasIndex kullanılır
             //Name ile beraber farkı datların da gelmesini istersek  .IncludeProperties(x => new { x.Price, x.Stock });
             // kod bloğunu da eklememiz gerekir

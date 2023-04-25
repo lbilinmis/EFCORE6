@@ -113,6 +113,10 @@ using (var context = new AppDbContext())
     ///
 
     var products = await context.Products.FromSqlRaw("select * from products").ToListAsync();
+    var productsSql = await context.Products.FromSqlInterpolated($"select * from products where price>{100}").ToListAsync();
 
+    var newProducs = context.Products.ToList();
+
+    //ön tanımlı sql cumleciği yazma işleminde ToSqlQuery
     Console.WriteLine("");
 }
