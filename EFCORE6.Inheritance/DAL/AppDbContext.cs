@@ -16,7 +16,10 @@ namespace EFCORE6.Inheritance.DAL
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             DbContextInitializer.Build();
-            optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information).UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlConnection"));
+            optionsBuilder
+                .LogTo(Console.WriteLine, LogLevel.Information)
+                .UseSqlServer(DbContextInitializer.Configuration.GetConnectionString("SqlConnection"))
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking); // AsNotracking işlemini her yerde yapar
 
 
         }
@@ -24,19 +27,19 @@ namespace EFCORE6.Inheritance.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Product>().ToSqlQuery("select Id,Name,Price,DiscountPrice from Product");
+            //modelBuilder.Entity<Product>().ToSqlQuery("select Id,Name,Price,DiscountPrice from Product");
 
-            //Fluent APı tarafında bu şekilde tanımlanır Indexlemek istediğim alanlar için hasIndex kullanılır
-            //Name ile beraber farkı datların da gelmesini istersek  .IncludeProperties(x => new { x.Price, x.Stock });
-            // kod bloğunu da eklememiz gerekir
-            // sorgumuzu yazarken hangi alanları da çekeceğimiz belirlersek kod yapısnı ona göre yazmamız lazım
+            ////Fluent APı tarafında bu şekilde tanımlanır Indexlemek istediğim alanlar için hasIndex kullanılır
+            ////Name ile beraber farkı datların da gelmesini istersek  .IncludeProperties(x => new { x.Price, x.Stock });
+            //// kod bloğunu da eklememiz gerekir
+            //// sorgumuzu yazarken hangi alanları da çekeceğimiz belirlersek kod yapısnı ona göre yazmamız lazım
 
-            modelBuilder.Entity<Product>().HasIndex(x => new { x.Name, x.Barcode })
-                .IncludeProperties(x => new { x.Price, x.Stock });
+            //modelBuilder.Entity<Product>().HasIndex(x => new { x.Name, x.Barcode })
+            //    .IncludeProperties(x => new { x.Price, x.Stock });
 
 
-            // kural belirtmek istersek
-            modelBuilder.Entity<Product>().HasCheckConstraint("PriceDiscountCheck","[Price]>[DiscountPrice]");
+            //// kural belirtmek istersek
+            //modelBuilder.Entity<Product>().HasCheckConstraint("PriceDiscountCheck","[Price]>[DiscountPrice]");
 
 
             //modelBuilder.Entity<PersonManager>().OwnsOne(x => x.Person, x =>
@@ -89,6 +92,9 @@ namespace EFCORE6.Inheritance.DAL
             //        .WithMany().HasForeignKey("StudentId").HasConstraintName("FK__StudentId")
             //    );
 
+            modelBuilder.Entity<Product>().Property(x=>x.IsDeleted).HasDefaultValue(false);
+
+            modelBuilder.Entity<Product>().HasQueryFilter(x => x.IsDeleted == false);
 
             base.OnModelCreating(modelBuilder);
         }

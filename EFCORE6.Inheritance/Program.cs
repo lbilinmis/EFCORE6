@@ -112,11 +112,31 @@ using (var context = new AppDbContext())
     ////join xProduct in context.Products on x.Id equals xProduct.CategoryId
     ///
 
+    //int pageSize=3, page = 1;
+
+
+    //var products = await context.Products.FromSqlRaw("select * from products").ToListAsync();
+    //var productsSql = await context.Products.FromSqlInterpolated($"select * from products where price>{100}").ToListAsync();
+
+
+    ////Sayfalama İşlemleri
+    //var newProducs = context.Products.ToList();
+    //var newProducsPageView = context.Products.OrderByDescending(x=>x.Id).Skip((page-1)*pageSize).Take(3).ToList();
+
+    ////1 2 3 4 5 6 7 8 9 10
+
+    ////Take(2) -- Skip(0) denilirse 0. dan itibaren 2 şerli verileri al anlmanına gelir Yani 1 2,3 4,5 6,7 8,9 10
+    ////Take(2) --Skip(2) denilirse ilk 2 tanesini atlar 3 4,5 6, 7 8,9 10 şeklinde verileri getirir
+
+    ////ön tanımlı sql cumleciği yazma işleminde ToSqlQuery
+
+
+    ////Sayfalama işlemi için 2 öneli metod vardır Take ve Skip methodları 
+    ////Take(5) 5 adet kayıt getir manasına gelir
+    ////Skip(5) Atlama işlemi gerçekleştir 10 kayıt varsa 5 ini atlar sonraki 5 datayı getiri
+
     var products = await context.Products.FromSqlRaw("select * from products").ToListAsync();
-    var productsSql = await context.Products.FromSqlInterpolated($"select * from products where price>{100}").ToListAsync();
 
-    var newProducs = context.Products.ToList();
 
-    //ön tanımlı sql cumleciği yazma işleminde ToSqlQuery
     Console.WriteLine("");
 }
